@@ -18,19 +18,17 @@ class UsuarioTest extends Test{
     }
     public function excluirTeste() {
         $usuario = new Usuario();
-    
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-    
+
+        $ultimoUsuario = $usuario->buscarUltimoUsuario();
+
+        if ($ultimoUsuario) {
+            $id = $ultimoUsuario['id'];
+
             $resultado = $usuario->excluirTeste($id);
-    
-            if ($resultado) {
-                echo "Usuário excluído com sucesso!";
-            } else {
-                echo "Erro ao excluir o usuário.";
-            }
+
+            $this->isTrue($resultado, "Erro ao excluir o último usuário."); 
         } else {
-            echo "ID não informado.";
+            echo "Nenhum usuário encontrado para excluir.";
         }
     }
     

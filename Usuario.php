@@ -26,6 +26,13 @@ class Usuario{
             return false;
         }
     }
+    public function buscarUltimoUsuario() {
+        $conn = $this->conectar();
+        $sql = "SELECT * FROM usuarios ORDER BY id DESC LIMIT 1"; 
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 
